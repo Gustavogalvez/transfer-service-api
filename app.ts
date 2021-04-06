@@ -9,10 +9,11 @@ const server = createServer(app);
 require('./config/express').default(app);
 app.use(routes);
 
+const PORT = process.env.PORT || 3000;
 // Start server
 function startServer() {
-    server.listen(8080, function () {
-        console.log(`Express server listening on http://localhost:${8080}`);
+    server.listen(PORT, function () {
+        console.log(`Express server listening on http://localhost:${PORT}`);
     });
 }
 startServer();
