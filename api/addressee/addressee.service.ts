@@ -1,7 +1,8 @@
 import { Pool } from "pg";
 
-export function getListOfAddressee(pool: Pool) {
-    return pool.query('SELECT * FROM addressee as a')
+export function getListOfAddressee(pool: Pool, search?: string) {
+    let where = search ? `WHERE nombre LIKE '%${search}%'` : '';
+    return pool.query('SELECT * FROM addressee as a ' + where);
 }
 
 export function insertAddresee(pool: Pool, body: any) {

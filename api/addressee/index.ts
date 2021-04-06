@@ -6,6 +6,7 @@ import {
 const router: Router = Router();
 
 router.get('/list', getAddressees);
+router.get('/list/:search', getAddressees);
 router.post('/add', addAddressee);
 
 module.exports = router;

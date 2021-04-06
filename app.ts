@@ -9,7 +9,7 @@ const server = createServer(app);
 require('./config/express').default(app);
 app.use(routes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 // Start server
 function startServer() {
     server.listen(PORT, function () {

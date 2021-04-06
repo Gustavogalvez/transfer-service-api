@@ -3,31 +3,36 @@ import { Pool } from 'pg';
 import { CONNECTION_PROD } from '../../config/environment/production';
 import { getListOfAddressee, insertAddresee } from './addressee.service';
 
-const pool = new Pool({
-    connectionString: CONNECTION_PROD,
-    ssl: { rejectUnauthorized: false }
-});
+function getPool() {
+    return new Pool({
+        connectionString: CONNECTION_PROD,
+        ssl: { rejectUnauthorized: false }
+    });
+}
 
 export function getAddressees(req: Request, res: Response) {
-    getListOfAddressee(pool).then((resp: any) => {
+    let pool = getPool();
+    let search = req.params['search'];
+    getListOfAddressee(pool, search).then((resp: any) => {
         pool.end();
         res.status(200);
         res.send(resp.rows);
     }).catch(() => {
         pool.end();
         res.status(500);
-        res.send('Error interno!')
+        res.send({msg: 'Error interno!'})
     });
 }
 
 export function addAddressee(req: Request, res: Response) {
+    let pool = getPool();
     insertAddresee(pool, req.body).then((resp: any) => {
         pool.end();
         res.status(200);
-        res.send('Actualizado correctamente')
+        res.send({msg: 'Actualizado correctamente'})
     }).catch(() => {
         pool.end();
         res.status(500);
-        res.send('Error interno!')
+        res.send({msg: 'Error interno!'})
     });
 }
