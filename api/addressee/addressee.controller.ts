@@ -10,6 +10,7 @@ function getPool() {
     });
 }
 
+/** Busca por nombre en los destinatarios */
 export function getAddressees(req: Request, res: Response) {
     let pool = getPool();
     let search = req.params['search'];
@@ -24,6 +25,7 @@ export function getAddressees(req: Request, res: Response) {
     });
 }
 
+/** Agrega un destinatario */
 export function addAddressee(req: Request, res: Response) {
     let pool = getPool();
     insertAddresee(pool, req.body).then((resp: any) => {

@@ -10,6 +10,7 @@ function getPool() {
     });
 }
 
+/** Listado de transferencias */
 export function listTransfer(req: Request, res: Response) {
     let pool = getPool();
     getLisTransfers(pool).then((resp: any) => {
@@ -23,6 +24,7 @@ export function listTransfer(req: Request, res: Response) {
     });
 }
 
+/** Obtiene las transferencias de un destinatario */
 export function getTransfer(req: Request, res: Response) {
     let pool = getPool();
     let IdAddressee = Number(req.params?.IdAddressee);
@@ -37,6 +39,7 @@ export function getTransfer(req: Request, res: Response) {
     });
 }
 
+/** Inserta una transferencia */
 export function sendTransfer(req: Request, res: Response) {
     let pool = getPool();
     insertTransfer(pool, req.body).then((resp: any) => {

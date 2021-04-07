@@ -2,6 +2,12 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+/**
+ * Agrega la configuración de express
+ * * Cors
+ * * bodyParser
+ * @param app express
+ */
 export default async function (app: any) {
     const corsOptions = {
       origin: '*',
