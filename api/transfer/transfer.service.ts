@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 
-export function getLisTransfers(pool: Pool, IdAddressee: number) {
+export function getLisTransfersByAddressee(pool: Pool, IdAddressee: number) {
     return pool.query('SELECT * FROM transfer as a ' + `WHERE addressee_id = ${IdAddressee}`);
 }
 
@@ -10,4 +10,12 @@ export function insertTransfer(pool: Pool, body: any) {
         values: [body.addressee_id, body.monto]
     };
     return pool.query(query)
+}
+
+export function getLisTransfers(pool: Pool) {
+    return pool.query(`
+        select a.*, t.monto
+        from transfer t
+        INNER JOIN addressee a on a.id = t.addressee_id
+    `);
 }

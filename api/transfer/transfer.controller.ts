@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Pool } from 'pg';
 import { CONNECTION_PROD } from '../../config/environment/production';
-import { getLisTransfers, insertTransfer } from './transfer.service';
+import { getLisTransfers, getLisTransfersByAddressee, insertTransfer } from './transfer.service';
 
 function getPool() {
     return new Pool({
@@ -10,17 +10,30 @@ function getPool() {
     });
 }
 
-export function getTransfer(req: Request, res: Response) {
+export function listTransfer(req: Request, res: Response) {
     let pool = getPool();
-    let IdAddressee = Number(req.params?.IdAddressee);
-    getLisTransfers(pool, IdAddressee).then((resp: any) => {
+    getLisTransfers(pool).then((resp: any) => {
         pool.end();
         res.status(200);
         res.send(resp.rows);
-    }).catch(() => {
+    }).catch((err) => {
         pool.end();
         res.status(500);
         res.send({msg: 'Error interno!'})
+    });
+}
+
+export function getTransfer(req: Request, res: Response) {
+    let pool = getPool();
+    let IdAddressee = Number(req.params?.IdAddressee);
+    getLisTransfersByAddressee(pool, IdAddressee).then((resp: any) => {
+        pool.end();
+        res.status(200);
+        res.send(resp.rows);
+    }).catch((err) => {
+        pool.end();
+        res.status(500);
+        res.send({msg: 'Error interno!', err})
     });
 }
 
