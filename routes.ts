@@ -5,6 +5,9 @@ const app = Router();
 app.use('/addressee', (req: any, res: any, next: any) => {
     require('./api/addressee')(req, res, next);
 });
+app.use('/transfer', (req: any, res: any, next: any) => {
+    require('./api/transfer')(req, res, next);
+});
 
 app.route('/*').get((req, res) => {
     res.status(500);
