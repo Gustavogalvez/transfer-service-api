@@ -19,7 +19,7 @@ export function listTransfer(req: Request, res: Response) {
     }).catch((err) => {
         pool.end();
         res.status(500);
-        res.send({msg: 'Error interno!'})
+        res.send({msg: 'Error interno del servidor!'})
     });
 }
 
@@ -46,6 +46,6 @@ export function sendTransfer(req: Request, res: Response) {
     }).catch(() => {
         pool.end();
         res.status(500);
-        res.send({msg: 'Error interno!'})
+        res.send({msg: 'Error interno del servidor!'})
     });
 }

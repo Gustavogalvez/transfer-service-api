@@ -20,7 +20,7 @@ export function getAddressees(req: Request, res: Response) {
     }).catch(() => {
         pool.end();
         res.status(500);
-        res.send({msg: 'Error interno!'})
+        res.send({msg: 'Error interno del servidor!'})
     });
 }
 
@@ -33,6 +33,6 @@ export function addAddressee(req: Request, res: Response) {
     }).catch(() => {
         pool.end();
         res.status(500);
-        res.send({msg: 'Error interno!'})
+        res.send({msg: 'Error interno del servidor!'})
     });
 }
